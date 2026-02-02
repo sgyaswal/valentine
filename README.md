@@ -1,133 +1,107 @@
 # Valentine's Day Interactive Website 💕
+### Static Version with Google Forms Integration
 
-A romantic, interactive website to ask someone to be your Valentine!
+A romantic, interactive website to ask someone to be your Valentine - No backend required!
 
-## 🌟 Two Versions Available
-
-### Main Branch - SMTP Email Backend
-Full-featured version with Node.js backend and custom HTML emails.
-- See [SMTP_SETUP.md](SMTP_SETUP.md) for setup
-- Deploy on Render, Heroku, Railway
-
-### Google Forms Branch - Static Version
-No backend needed! Responses saved to Google Forms/Sheets.
-- See [GOOGLE_FORMS_SETUP.md](GOOGLE_FORMS_SETUP.md) for setup  
-- Deploy on GitHub Pages, Netlify, Vercel (free!)
-- **Switch to this branch:** `git checkout google-forms-version`
-
----
-
-## Features
+## 🌟 Features
 
 ✨ Beautiful animated Valentine's proposal page  
 📅 Date picker for scheduling your date  
 🍔 Food selection with multiple choices  
 🍰 Dessert preferences  
 🎨 Activity selection (arcade, cinema, park, etc.)  
-💾 Saves all responses in browser  
-📊 Summary page with all selections  
+📝 **Google Forms integration** - Responses saved automatically!  
+💾 Browser storage for selections  
+📊 Summary page showing all choices  
+🚀 **100% Static** - Deploy free anywhere!  
 
-**Main Branch:** 💌 SMTP Email notifications  
-**Google Forms Branch:** 📝 Google Forms/Sheets integration  
+## 🚀 Quick Deploy
 
----
+### GitHub Pages (Free)
+1. Go to repository Settings → Pages
+2. Select branch: `google-forms-version`
+3. Click Save
+4. Site live at: `https://sgyaswal.github.io/valentine/`
 
-## Quick Start (Main Branch - SMTP)
+### Netlify (Free)
+1. Drag & drop folder to [netlify.com](https://netlify.com)
+2. Done!
 
-```bash
-# Install dependencies
-npm install
+### Vercel (Free)
+1. Import from GitHub
+2. Select `google-forms-version` branch
+3. Deploy
 
-# Configure email
-cp .env.example .env
-# Edit .env with your SMTP settings
+## 📝 Setup (5 minutes)
 
-# Start server
-npm start
+1. **Create Google Form** with 4 short answer questions:
+   - Selected Date
+   - Food Choices
+   - Dessert Choices
+   - Activities
 
-# Open in browser
-http://localhost:3000
-```
+2. **Get pre-filled link** from form settings
 
-## Quick Start (Google Forms Branch)
+3. **Update lastpage.html** with your form URL and entry IDs
 
-```bash
-# Switch to Google Forms branch
-git checkout google-forms-version
+4. **Deploy** to any static host
 
-# Open index.html in browser (no server needed!)
-# Or deploy to GitHub Pages/Netlify
-```
+**Detailed guide:** [GOOGLE_FORMS_SETUP.md](GOOGLE_FORMS_SETUP.md)
 
----
-
-## Which Version Should I Use?
-
-| Feature | Main (SMTP) | Google Forms |
-|---------|-------------|--------------|
-| **Hosting** | Needs server | Static (free) |
-| **Setup** | More complex | Very easy |
-| **Email** | Custom HTML | Form notifications |
-| **Data** | Email only | Google Sheets |
-| **Cost** | Free tier limits | Completely free |
-| **Best for** | Custom emails | Quick deploy |
-
----
-
-## Documentation
-
-- [SMTP_SETUP.md](SMTP_SETUP.md) - SMTP backend setup (main branch)
-- [GOOGLE_FORMS_SETUP.md](GOOGLE_FORMS_SETUP.md) - Google Forms setup (google-forms-version branch)
-- [RENDER_DEPLOYMENT.md](RENDER_DEPLOYMENT.md) - Deploy SMTP version to Render
-
----
-
-## Project Structure
+## 📂 Files
 
 ```
 valentine/
-├── index.html          # Valentine proposal page
-├── thankyou.html       # Acceptance page
-├── date.html           # Date picker
-├── food.html           # Food selection
-├── dessert.html        # Dessert selection
-├── activities.html     # Activities selection
-├── lastpage.html       # Final page with summary
-├── server.js           # Node.js backend (main branch only)
-├── package.json        # Dependencies (main branch only)
-├── css/               # Stylesheets
-└── food/              # Food/activity images
+├── index.html       # Proposal page
+├── thankyou.html    # Acceptance page
+├── date.html        # Date picker
+├── food.html        # Food selection
+├── dessert.html     # Dessert selection
+├── activities.html  # Activities
+├── lastpage.html    # Summary + Form submission
+├── css/            # Styles
+└── food/           # Images
 ```
 
----
+## ✅ Why This Version?
 
-## How It Works
+✅ **Zero cost** - Completely free hosting  
+✅ **No server** - Pure HTML/CSS/JS  
+✅ **Easy setup** - 5 minutes to deploy  
+✅ **Google Sheets** - All responses in spreadsheet  
+✅ **Email alerts** - Google Forms notifications  
+✅ **No maintenance** - Set and forget  
 
-1. User answers "Yes" to Valentine proposal
-2. Selects date for the date
-3. Chooses food preferences
-4. Picks dessert options
-5. Selects activities
-6. On final page:
-   - All selections are displayed
-   - **Main branch:** Email sent via SMTP
-   - **Google Forms branch:** Saved to Google Forms/Sheets
-   - Responses saved in browser localStorage
+## 📊 View Responses
 
----
+1. Open your Google Form
+2. Click "Responses" tab  
+3. Link to Google Sheets
+4. Enable email notifications
 
-## Technologies
+## 🔄 Switch to SMTP Version
 
-**Frontend:** HTML, CSS, JavaScript  
-**Main Branch Backend:** Node.js, Express, Nodemailer  
-**Google Forms Branch:** Pure static (no backend)  
-**Storage:** LocalStorage (client) + Email/Google Forms
+Want custom emails with Node.js backend?
+```bash
+git checkout main
+```
 
----
+See main branch README for SMTP setup.
 
-## License
+## 📖 Documentation
 
-MIT
+- [GOOGLE_FORMS_SETUP.md](GOOGLE_FORMS_SETUP.md) - Complete setup guide
+
+## 💻 Local Testing
+
+Just open `index.html` in your browser. No server needed!
+
+## 📱 Works On
+
+✅ All modern browsers  
+✅ Mobile devices  
+✅ Tablets  
+✅ Desktop  
 
 ---
 
