@@ -47,8 +47,25 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='activities.html'">
+    <button class="button" id="continueBtn">
       Continue UWU
     </button>
+
+    <script>
+      // Load saved selections
+      const savedDesserts = JSON.parse(localStorage.getItem('selectedDesserts') || '[]');
+      savedDesserts.forEach(dessert => {
+        const checkbox = document.querySelector(`input[value="${dessert}"]`);
+        if (checkbox) checkbox.checked = true;
+      });
+
+      // Save selections on continue
+      document.getElementById('continueBtn').addEventListener('click', function() {
+        const selectedDesserts = Array.from(document.querySelectorAll('input[name="dessert"]:checked'))
+          .map(cb => cb.value);
+        localStorage.setItem('selectedDesserts', JSON.stringify(selectedDesserts));
+        window.location.href = 'activities.html';
+      });
+    </script>
   </body>
 </html>

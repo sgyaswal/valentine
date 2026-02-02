@@ -10,11 +10,11 @@
     <div class="hearts-container"></div>
     <h1 title="choose a date">When can I take you out, Aishwarya? 🌹</h1>
     <p class="subtitle">Pick a date when you're free and let's make it magical! ✨</p>
-    <form class="form-group">
+    <form class="form-group" id="dateForm">
       <label>Choose our special day:</label>
       <div>
-        <input type="date" required />
-        <button class="button" type="submit" formaction="food.html">
+        <input type="date" id="dateInput" required />
+        <button class="button" type="submit">
           Perfect! Let's go! 💖
         </button>
       </div>
@@ -38,6 +38,22 @@
       }
       
       setInterval(createHeart, 500);
+
+      // Load saved date if exists
+      const savedDate = localStorage.getItem('selectedDate');
+      if (savedDate) {
+        document.getElementById('dateInput').value = savedDate;
+      }
+
+      // Save date selection
+      document.getElementById('dateForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const dateValue = document.getElementById('dateInput').value;
+        if (dateValue) {
+          localStorage.setItem('selectedDate', dateValue);
+          window.location.href = 'food.html';
+        }
+      });
     </script>
   </body>
 </html>

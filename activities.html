@@ -70,8 +70,25 @@
         >
       </div>
     </div>
-    <button class="button" onclick="location.href='lastpage.html'">
+    <button class="button" id="continueBtn">
       Last page
     </button>
+
+    <script>
+      // Load saved selections
+      const savedActivities = JSON.parse(localStorage.getItem('selectedActivities') || '[]');
+      savedActivities.forEach(activity => {
+        const checkbox = document.querySelector(`input[value="${activity}"]`);
+        if (checkbox) checkbox.checked = true;
+      });
+
+      // Save selections on continue
+      document.getElementById('continueBtn').addEventListener('click', function() {
+        const selectedActivities = Array.from(document.querySelectorAll('input[name="activities"]:checked'))
+          .map(cb => cb.value);
+        localStorage.setItem('selectedActivities', JSON.stringify(selectedActivities));
+        window.location.href = 'lastpage.html';
+      });
+    </script>
   </body>
 </html>

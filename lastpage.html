@@ -8,6 +8,11 @@
   </head>
   <body>
     <div id="thankyou"><b>Thank you for being my girlfriend</b></div>
+    
+    <div id="summary" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 600px; text-align: left;">
+      <div id="summaryContent"></div>
+    </div>
+
     <div class="flower">
       <div class="f-wrapper">
         <div class="flower__line"></div>
@@ -58,5 +63,52 @@
       </div>
       <div class="flower__glass"></div>
     </div>
+
+    <script>
+      // API endpoint (change if deploying to different server)
+      const API_URL = 'http://localhost:3000';
+
+      // Send email with form responses via SMTP
+      async function sendEmail() {
+        const date = localStorage.getItem('selectedDate');
+        const food = JSON.parse(localStorage.getItem('selectedFood') || '[]');
+        const desserts = JSON.parse(localStorage.getItem('selectedDesserts') || '[]');
+        const activities = JSON.parse(localStorage.getItem('selectedActivities') || '[]');
+
+        // Check if email was already sent for this session
+        if (localStorage.getItem('emailSent') === 'true') {
+          console.log('Email already sent for this session');
+          return;
+        }
+
+        try {
+          const response = await fetch(`${API_URL}/send-email`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              date,
+              food,
+              desserts,
+              activities
+            })
+          });
+
+          const data = await response.json();
+
+          if (data.success) {
+            console.log('✅ Email sent successfully!');
+            localStorage.setItem('emailSent', 'true');
+          } else {
+            console.error('❌ Failed to send email:', data.message);
+          }
+        } catch (error) {
+          console.error('❌ Error sending email:', error);
+          console.log('Make sure the server is running on', API_URL);
+        }
+      }
+      sendEmail();
+    </script>
   </body>
 </html>

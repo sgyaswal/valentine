@@ -57,8 +57,25 @@
         <label><input type="checkbox" name="food" value="sushi" /> sushi</label>
       </div>
     </div>
-    <button class="button" onclick="location.href='dessert.html'">
+    <button class="button" id="continueBtn">
       Continue UWU
     </button>
+
+    <script>
+      // Load saved selections
+      const savedFood = JSON.parse(localStorage.getItem('selectedFood') || '[]');
+      savedFood.forEach(food => {
+        const checkbox = document.querySelector(`input[value="${food}"]`);
+        if (checkbox) checkbox.checked = true;
+      });
+
+      // Save selections on continue
+      document.getElementById('continueBtn').addEventListener('click', function() {
+        const selectedFood = Array.from(document.querySelectorAll('input[name="food"]:checked'))
+          .map(cb => cb.value);
+        localStorage.setItem('selectedFood', JSON.stringify(selectedFood));
+        window.location.href = 'dessert.html';
+      });
+    </script>
   </body>
 </html>
