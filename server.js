@@ -42,7 +42,7 @@ app.post('/send-email', async (req, res) => {
     const mailOptions = {
       from: `"Valentine Website" <${process.env.SMTP_USER}>`,
       to: process.env.RECIPIENT_EMAIL || process.env.SMTP_USER,
-      subject: '💕 Aishwarya Has Responded to Your Valentine Request!',
+      subject: '💕 Aishuu❤️ Has Responded to Your Valentine Request!',
       html: `
         <!DOCTYPE html>
         <html>
@@ -64,7 +64,7 @@ app.post('/send-email', async (req, res) => {
           <div class="container">
             <div class="header">
               <h1 style="margin: 0;">💕 She Said Yes! 💕</h1>
-              <p style="margin: 10px 0 0 0;">Aishwarya has filled out your Valentine's form!</p>
+              <p style="margin: 10px 0 0 0;">Aishuu❤️ has filled out your Valentine's form!</p>
             </div>
             <div class="content">
               <div class="section">
