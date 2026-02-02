@@ -68,15 +68,14 @@
 
     <script>
       // Google Forms Configuration
-      // Replace this with your Google Form's pre-filled URL
-      const GOOGLE_FORM_URL = 'YOUR_GOOGLE_FORM_URL';
+      const GOOGLE_FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSf37E2Yed17iG0aIN1277k4wpsRtftKb3wjVK-3mZv2HHv4JQ/formResponse';
       
       // Google Form field IDs (entry.XXXXXXXX format)
       const FORM_FIELDS = {
-        date: 'entry.000000001',
-        food: 'entry.000000002',
-        desserts: 'entry.000000003',
-        activities: 'entry.000000004'
+        date: 'entry.826574915',
+        food: 'entry.1970361729',
+        desserts: 'entry.459736805',
+        activities: 'entry.1439921656'
       };
 
       // Submit responses to Google Forms
@@ -131,43 +130,6 @@
           console.error('❌ Error submitting to Google Forms:', error);
         }
       }
-
-      // Display all saved responses
-      function displaySummary() {
-        const summaryContent = document.getElementById('summaryContent');
-        
-        const date = localStorage.getItem('selectedDate');
-        const food = JSON.parse(localStorage.getItem('selectedFood') || '[]');
-        const desserts = JSON.parse(localStorage.getItem('selectedDesserts') || '[]');
-        const activities = JSON.parse(localStorage.getItem('selectedActivities') || '[]');
-
-        let html = '';
-        
-        if (date) {
-          html += `<p><strong>📅 Date:</strong> ${new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>`;
-        }
-        
-        if (food.length > 0) {
-          html += `<p><strong>🍔 Food Choices:</strong> ${food.join(', ')}</p>`;
-        }
-        
-        if (desserts.length > 0) {
-          html += `<p><strong>🍰 Dessert Choices:</strong> ${desserts.join(', ')}</p>`;
-        }
-        
-        if (activities.length > 0) {
-          html += `<p><strong>🎨 Activities:</strong> ${activities.join(', ')}</p>`;
-        }
-
-        if (html === '') {
-          html = '<p style="text-align: center; color: #999;">No selections saved yet</p>';
-        }
-
-        summaryContent.innerHTML = html;
-      }
-
-      // Run on page load
-      displaySummary();
       submitToGoogleForms();
     </script>
   </body>
