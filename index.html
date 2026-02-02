@@ -3,30 +3,77 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Be My Valentine</title>
+    <title>For My Beautiful Aishwarya 💕</title>
     <link rel="stylesheet" href="css/valentine.css" />
   </head>
   <body>
-    <div id="valentineQuestion"><b>Will you be my valentine?</b></div>
+    <div class="hearts-container"></div>
+    <div class="sweet-message">Hey Beautiful! 💕</div>
+    <div id="valentineQuestion"><b>Aishwarya, will you be my Valentine? 💖</b></div>
+    <p class="romantic-text">You make my heart skip a beat every single day ✨</p>
     <button class="answerButton" onclick="location.href='thankyou.html'">
-      Yes
+      Yes, I'd love to! 💕
     </button>
-    <button class="answerButton" id="noButton">I no no wanna o(╥﹏╥)o</button>
+    <button class="answerButton" id="noButton">Umm... let me think 🤔</button>
     <br />
     <img src="cat.gif" alt="cat asking question" class="responsive" />
 
     <script>
-      document
-        .getElementById("noButton")
-        .addEventListener("click", function () {
-          var yesButton = document.querySelector(
-            'button[onclick*="thankyou.html"]'
-          );
-          var currentFontSize = parseInt(
-            window.getComputedStyle(yesButton).fontSize
-          );
-          yesButton.style.fontSize = currentFontSize + 10 + "px"; // Increase font size by 5px
-        });
+      // Create floating hearts animation
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.innerHTML = '❤️';
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.opacity = Math.random() * 0.5 + 0.3;
+        document.querySelector('.hearts-container').appendChild(heart);
+        
+        setTimeout(() => {
+          heart.remove();
+        }, 7000);
+      }
+      
+      // Create hearts periodically
+      setInterval(createHeart, 500);
+      
+      // No button functionality
+      var noButton = document.getElementById("noButton");
+      var yesButton = document.querySelector('button[onclick*="thankyou.html"]');
+      var attempts = 0;
+      var messages = [
+        "Are you sure? 🥺",
+        "Please? Pretty please? 🥹",
+        "I'll be sad... 😢",
+        "Think about it again! 💔",
+        "You're breaking my heart! 💔",
+        "One more chance? 🙏"
+      ];
+
+      function moveButton() {
+        var maxX = window.innerWidth - noButton.offsetWidth - 20;
+        var maxY = window.innerHeight - noButton.offsetHeight - 20;
+        
+        var randomX = Math.floor(Math.random() * maxX);
+        var randomY = Math.floor(Math.random() * maxY);
+        
+        noButton.style.position = "fixed";
+        noButton.style.left = randomX + "px";
+        noButton.style.top = randomY + "px";
+        noButton.style.transition = "all 0.3s ease";
+        
+        // Change button text with romantic messages
+        if (attempts < messages.length) {
+          noButton.textContent = messages[attempts];
+          attempts++;
+        }
+      }
+
+      noButton.addEventListener("mouseover", moveButton);
+      noButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        moveButton();
+      });
     </script>
   </body>
 </html>

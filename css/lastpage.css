@@ -2,34 +2,133 @@ body {
   text-align: center;
   margin-top: 30px;
   font-family: "Courier";
-  background-color: #fff5e4;
+  background: linear-gradient(135deg, #fff5e4 0%, #ffe3e1 100%);
   color: #ff9494;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
+
+.hearts-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.floating-heart {
+  position: absolute;
+  bottom: -50px;
+  animation: floatUp 7s ease-in infinite;
+  pointer-events: none;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -50px;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(50px) rotate(180deg);
+  }
+  100% {
+    bottom: 110%;
+    transform: translateX(-50px) rotate(360deg);
+    opacity: 0.3;
+  }
+}
+
+.celebration {
+  font-size: 80px;
+  animation: bounce 1s ease-in-out infinite;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 #thankyou {
   font-size: 50px;
   margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+  text-shadow: 2px 2px 4px rgba(255, 148, 148, 0.3);
+  animation: pulse 2s ease-in-out infinite;
 }
-.rizz {
-  margin-bottom: 10 px;
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.love-message {
+  font-size: 22px;
+  color: #e67373;
+  margin: 20px auto;
+  font-style: italic;
+  max-width: 600px;
+  position: relative;
+  z-index: 2;
+}
+
+.next-step {
+  margin-top: 20px;
+  color: #e67373;
+  position: relative;
+  z-index: 2;
+}
+
+#rizz {
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(255, 148, 148, 0.3);
+}
+
+audio {
+  margin: 20px 0;
+  position: relative;
+  z-index: 2;
 }
 .button {
-  padding: 10px 20px;
-  font-size: 18px;
+  padding: 15px 30px;
+  font-size: 20px;
   cursor: pointer;
   margin: 10px;
   font-family: "courier";
   margin-bottom: 20px;
   background-color: #ffe3e1;
   color: #e67373;
-  border-radius: 12px;
-  border: 2px solid #ffe3e1;
-  box-shadow: 1px 1px 2px #ff9494;
-  transition: 0.3s;
+  border-radius: 25px;
+  border: 3px solid #ff9494;
+  box-shadow: 0 4px 15px rgba(255, 148, 148, 0.4);
+  transition: all 0.3s;
+  position: relative;
+  z-index: 2;
+  font-weight: bold;
 }
 
 .button:hover {
   background-color: #ff9494;
-  color: #ffe3e1;
-  border: 2px solid #ff9494;
-  box-shadow: 1px 1px 2px #ffe3e1;
+  color: #fff;
+  border: 3px solid #e67373;
+  box-shadow: 0 6px 20px rgba(255, 148, 148, 0.6);
+  transform: translateY(-2px);
 }

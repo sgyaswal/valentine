@@ -3,21 +3,38 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thank you</title>
+    <title>Yay! 💕</title>
     <link rel="stylesheet" href="css/lastpage.css" />
   </head>
   <body>
-    <div id="thankyou"><b>Thank you</b></div>
-
-    <img id="rizz" src="rizz.gif" alt="rizzler god" class="responsive" />
+    <div class="hearts-container"></div>
+    <div class="celebration">🎉</div>
+    <div id="thankyou"><b>Yay! I knew you'd say yes! 💕</b></div>
+    <p class="love-message">You just made me the happiest person alive, Aishwarya! ✨</p>
     <br />
-    <audio controls autoplay loop>
-      <source src="congratulations.mp3" type="audio/mpeg" />
-      Your browser does not support the audio element.
-    </audio>
-    <h1>Don't go yet!</h1>
+    <h1 class="next-step">Now let's plan something special! 🌹</h1>
     <button class="button" onclick="location.href='date.html'">
-      Click me UWU
+      Let's pick a date! 💖
     </button>
+
+    <script>
+      // Create floating hearts animation
+      function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        const hearts = ['❤️', '💕', '💖', '💗', '💝'];
+        heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+        heart.style.fontSize = (Math.random() * 10 + 20) + 'px';
+        document.querySelector('.hearts-container').appendChild(heart);
+        
+        setTimeout(() => {
+          heart.remove();
+        }, 7000);
+      }
+      
+      setInterval(createHeart, 300);
+    </script>
   </body>
 </html>
