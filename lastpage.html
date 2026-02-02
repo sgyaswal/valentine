@@ -9,11 +9,6 @@
   <body>
     <img src="gf.jpeg" alt="Aishuu❤️" class="girlfriend-photo-final" />
     <div id="thankyou"><b>Thank you for being my girlfriend</b></div>
-    
-    <div id="summary" style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; margin: 20px auto; max-width: 600px; text-align: left;">
-      <h2 style="text-align: center; color: #ff1493;">Your Selections 💕</h2>
-      <div id="summaryContent"></div>
-    </div>
 
     <div class="flower">
       <div class="f-wrapper">
@@ -130,6 +125,8 @@
           console.error('❌ Error submitting to Google Forms:', error);
         }
       }
+
+      // Run on page load - submit to Google Forms silently
       submitToGoogleForms();
     </script>
   </body>
