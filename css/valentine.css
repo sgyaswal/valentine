@@ -49,6 +49,31 @@ body {
   z-index: 2;
 }
 
+.girlfriend-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #ff9494;
+  box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+  margin: 20px auto;
+  display: block;
+  animation: photoGlow 3s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+@keyframes photoGlow {
+  0%, 100% {
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.4);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.6);
+    transform: scale(1.05);
+  }
+}
+
 @keyframes pulse {
   0%, 100% {
     transform: scale(1);
