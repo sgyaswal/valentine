@@ -65,8 +65,10 @@
     </div>
 
     <script>
-      // API endpoint (change if deploying to different server)
-      const API_URL = 'http://localhost:3000';
+      // API endpoint - automatically detects environment
+      const API_URL = window.location.hostname === 'localhost' 
+        ? 'http://localhost:3000' 
+        : window.location.origin;
 
       // Send email with form responses via SMTP
       async function sendEmail() {
