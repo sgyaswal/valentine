@@ -65,52 +65,108 @@
     </div>
 
     <script>
-      // API endpoint - automatically detects environment
-      const API_URL = window.location.hostname === 'localhost' 
-        ? 'http://localhost:3000' 
-        : window.location.origin;
+      // Google Forms Configuration
+      // Replace this with your Google Form's pre-filled URL
+      const GOOGLE_FORM_URL = 'YOUR_GOOGLE_FORM_URL';
+      
+      // Google Form field IDs (entry.XXXXXXXX format)
+      const FORM_FIELDS = {
+        date: 'entry.000000001',
+        food: 'entry.000000002',
+        desserts: 'entry.000000003',
+        activities: 'entry.000000004'
+      };
 
-      // Send email with form responses via SMTP
-      async function sendEmail() {
+      // Submit responses to Google Forms
+      async function submitToGoogleForms() {
         const date = localStorage.getItem('selectedDate');
         const food = JSON.parse(localStorage.getItem('selectedFood') || '[]');
         const desserts = JSON.parse(localStorage.getItem('selectedDesserts') || '[]');
         const activities = JSON.parse(localStorage.getItem('selectedActivities') || '[]');
 
-        // Check if email was already sent for this session
-        if (localStorage.getItem('emailSent') === 'true') {
-          console.log('Email already sent for this session');
+        // Check if already submitted
+        if (localStorage.getItem('formSubmitted') === 'true') {
+          console.log('Form already submitted for this session');
+          return;
+        }
+
+        // Check if Google Form is configured
+        if (GOOGLE_FORM_URL === 'YOUR_GOOGLE_FORM_URL') {
+          console.log('⚠️ Google Form not configured. Please update GOOGLE_FORM_URL in lastpage.html');
           return;
         }
 
         try {
-          const response = await fetch(`${API_URL}/send-email`, {
+          // Create form data
+          const formData = new FormData();
+          
+          // Format date
+          const formattedDate = date 
+            ? new Date(date).toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+              })
+            : 'Not selected';
+          
+          formData.append(FORM_FIELDS.date, formattedDate);
+          formData.append(FORM_FIELDS.food, food.join(', ') || 'None');
+          formData.append(FORM_FIELDS.desserts, desserts.join(', ') || 'None');
+          formData.append(FORM_FIELDS.activities, activities.join(', ') || 'None');
+
+          // Submit to Google Forms
+          await fetch(GOOGLE_FORM_URL, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              date,
-              food,
-              desserts,
-              activities
-            })
+            body: formData,
+            mode: 'no-cors' // Required for Google Forms
           });
 
-          const data = await response.json();
-
-          if (data.success) {
-            console.log('✅ Email sent successfully!');
-            localStorage.setItem('emailSent', 'true');
-          } else {
-            console.error('❌ Failed to send email:', data.message);
-          }
+          console.log('✅ Response submitted to Google Forms!');
+          localStorage.setItem('formSubmitted', 'true');
+          
         } catch (error) {
-          console.error('❌ Error sending email:', error);
-          console.log('Make sure the server is running on', API_URL);
+          console.error('❌ Error submitting to Google Forms:', error);
         }
       }
-      sendEmail();
+
+      // Display all saved responses
+      function displaySummary() {
+        const summaryContent = document.getElementById('summaryContent');
+        
+        const date = localStorage.getItem('selectedDate');
+        const food = JSON.parse(localStorage.getItem('selectedFood') || '[]');
+        const desserts = JSON.parse(localStorage.getItem('selectedDesserts') || '[]');
+        const activities = JSON.parse(localStorage.getItem('selectedActivities') || '[]');
+
+        let html = '';
+        
+        if (date) {
+          html += `<p><strong>📅 Date:</strong> ${new Date(date).toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</p>`;
+        }
+        
+        if (food.length > 0) {
+          html += `<p><strong>🍔 Food Choices:</strong> ${food.join(', ')}</p>`;
+        }
+        
+        if (desserts.length > 0) {
+          html += `<p><strong>🍰 Dessert Choices:</strong> ${desserts.join(', ')}</p>`;
+        }
+        
+        if (activities.length > 0) {
+          html += `<p><strong>🎨 Activities:</strong> ${activities.join(', ')}</p>`;
+        }
+
+        if (html === '') {
+          html = '<p style="text-align: center; color: #999;">No selections saved yet</p>';
+        }
+
+        summaryContent.innerHTML = html;
+      }
+
+      // Run on page load
+      displaySummary();
+      submitToGoogleForms();
     </script>
   </body>
 </html>
